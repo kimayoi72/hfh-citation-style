@@ -28,6 +28,14 @@
     <summary>Zitierkonventionen des Fachbereichs Psychologie an der Hamburger Fernhochschule based on http://www.zotero.org/styles/apa-single-spaced</summary>
     <updated>2023-08-18T11:28:53+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+
+    <!--
+      Changes made to template
+      - Use page numbers in citations
+      
+      Open issues:
+      - For websites add the date of access like "[26.02.2023]""
+    -->
   </info>
   <locale xml:lang="en">
     <terms>
@@ -286,6 +294,15 @@
       </group>
     </group>
   </macro>
+  <macro name="hfh:date-intext">
+    <group delimiter=" ">
+      <group>
+        <label suffix=" " variable="page" form="short"/>
+        <number variable="page"/>
+      </group>
+    </group>
+  </macro>
+
   <!-- APA has two description elements following the title:
         title (parenthetical) [bracketed]  -->
   <macro name="title-and-descriptions">
@@ -1249,17 +1266,17 @@
         <text variable="DOI" prefix="https://doi.org/"/>
       </if>
       <else-if variable="URL">
-        <group delimiter=" ">
+        <group delimiter=" " suffix=".">
+          <text variable="URL"/>
           <choose>
             <if variable="issued status" match="none">
-              <group delimiter=" ">
-                <text term="retrieved" text-case="capitalize-first"/>
-                <date variable="accessed" form="text" suffix=","/>
-                <text term="from"/>
+              <group delimiter=" " prefix="[" suffix="]">
+                <!-- <text term="retrieved" text-case="capitalize-first"/> -->
+                <date variable="accessed" form="numeric"/>
+                <!-- <text term="from"/> -->
               </group>
             </if>
           </choose>
-          <text variable="URL"/>
         </group>
       </else-if>
     </choose>
