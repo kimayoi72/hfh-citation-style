@@ -285,22 +285,64 @@
       </else>
     </choose>
   </macro>
-
-  <macro name="hfh:page-intext">
-    <group delimiter=" ">
-      <group>
-        <label suffix=" " variable="page" form="short"/>
-        <number variable="page"/>
-      </group>
-    </group>
-  </macro>
-  <macro name="hfh:date-intext">
-    <group delimiter=" ">
-      <group>
-        <label suffix=" " variable="page" form="short"/>
-        <number variable="page"/>
-      </group>
-    </group>
+<macro name="date-intext">
+    <!-- TODO: Add new item types -->
+    <choose>
+      <if variable="issued">
+        <group delimiter="/">
+          <group delimiter=" ">
+            <choose>
+              <if is-uncertain-date="original-date">
+                <text term="circa" form="short"/>
+              </if>
+            </choose>
+            <date variable="original-date">
+              <date-part name="year"/>
+            </date>
+          </group>
+          <group delimiter=" ">
+            <choose>
+              <if is-uncertain-date="issued">
+                <text term="circa" form="short"/>
+              </if>
+            </choose>
+            <group>
+              <choose>
+                <if type="interview personal_communication" match="any">
+                  <choose>
+                    <if variable="archive container-title DOI publisher URL" match="none">
+                      <!-- These variables indicate that the communication is retrievable by the reader.
+                           If not, then use the in-text-only personal communication format -->
+                      <date variable="issued" form="text"/>
+                    </if>
+                    <else>
+                      <date variable="issued">
+                        <date-part name="year"/>
+                      </date>
+                    </else>
+                  </choose>
+                </if>
+                <else>
+                  <date variable="issued">
+                    <date-part name="year"/>
+                  </date>
+                </else>
+              </choose>
+              <text variable="year-suffix"/>
+            </group>
+          </group>
+        </group>
+      </if>
+      <else-if variable="status">
+        <!-- TODO: Should I print status as-is, or should I print the in-press term? -->
+        <text variable="status" text-case="lowercase"/>
+        <text variable="year-suffix" prefix="-"/>
+      </else-if>
+      <else>
+        <text term="no date" form="short"/>
+        <text variable="year-suffix" prefix="-"/>
+      </else>
+    </choose>
   </macro>
 
   <!-- APA has two description elements following the title:
@@ -1548,14 +1590,17 @@
       <choose>
         <if locator="chapter">
           <label variable="locator" text-case="capitalize-first"/>
+          <number variable="locator"/>
         </if>
         <else>
-          <label variable="locator" form="short"/>
+          <!-- to display page numbers we cannot use locator check for page -->
+          <label variable="page" form="short"/>
+          <number variable="page"/>
         </else>
       </choose>
-      <text variable="locator"/>
-    </group>
+    </group> 
   </macro>
+
   <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" disambiguate-add-names="true" disambiguate-add-givenname="true" collapse="year" givenname-disambiguation-rule="primary-name-with-initials">
     <sort>
       <key macro="author-bib" names-min="3" names-use-first="1"/>
@@ -1567,8 +1612,7 @@
       <group delimiter=", ">
         <text macro="author-intext"/>
         <text macro="date-intext"/>
-        <!-- HFH wants to have a page -->
-        <text macro="hfh:page-intext"/>
+        <text macro="citation-locator"/>
       </group>
     </layout>
   </citation>
