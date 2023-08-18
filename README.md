@@ -11,9 +11,11 @@ See also https://github.com/citation-style-language/documentation.
 1. Download [hamburger-fernhochschule-fachbereich-psychology.csl from latest release](https://github.com/kimayoi72/hfh-citation-style/releases/latest) to your local directory.
 2. Open Zotero and install the style using the file.
 
-## Open Issues
+## Additional link
 
-1. [Wrong CSL version?](https://github.com/kimayoi72/hfh-citation-style/issues/1)
+- [Citation Styles Website](https://citationstyles.org/)
+- [Citation Style Editor](https://editor.citationstyles.org/)
+
 
 ## Licensing
 
