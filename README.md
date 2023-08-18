@@ -15,7 +15,8 @@ See also https://github.com/citation-style-language/documentation.
 
 - [Citation Styles Website](https://citationstyles.org/)
 - [Citation Style Editor](https://editor.citationstyles.org/)
-
+- [Zotero - Citation Styles](https://www.zotero.org/support/dev/citation_styles)
+- [Zotero Item Types](https://aurimasv.github.io/z2csl/typeMap.xml)
 
 ## Licensing
 
