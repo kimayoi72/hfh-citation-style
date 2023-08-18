@@ -8,9 +8,8 @@
     <id>http://www.zotero.org/styles/hamburger-fernhochschule-fachbereich-psychology</id>
     <link href="https://github.com/kimayoi72/hfh-citation-style/blob/main/hamburger-fernhochschule-fachbereich-psychology" rel="self"/>
     <!-- <link href="https://www.zotero.org/styles/hamburger-fernhochschule-fachbereich-psychology" rel="self"/> -->
-    <link href="http://www.zotero.org/styles/apa" rel="template"/>
+    <link href="http://www.zotero.org/styles/apa-single-spaced" rel="template"/>
     <link href="https://campus.hamburger-fh.de/material/download/a40a93295a0510b2b3af685ceebcf696_ceac31443783497dbb0ca0764cde38e4" rel="documentation" />
-    <link href="https://github.com/kimayoi72/hfh-citation-style/blob/main/LICENSE" rel="license" />
     <author>
       <name>Brenton M. Wiernik</name>
       <email>zotero@wiernik.org</email>
