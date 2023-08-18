@@ -32,9 +32,7 @@
     <!--
       Changes made to template
       - Use page numbers in citations
-      
-      Open issues:
-      - For websites add the date of access like "[26.02.2023]""
+      - For websites add the date of access like "[26.02.2023]"
     -->
   </info>
   <locale xml:lang="en">
@@ -255,7 +253,7 @@
                 </choose>
               </else-if>
               <!-- Only year: article article-journal book chapter entry entry-dictionary entry-encyclopedia dataset figure graphic
-                    manuscript map musical_score paper-conference[published] patent report review review-book thesis -->
+                   manuscript map musical_score paper-conference[published] patent report review review-book thesis -->
             </choose>
           </if>
           <else-if variable="status">
@@ -273,6 +271,7 @@
     </group>
   </macro>
   <macro name="date-sort-group">
+    <!-- APA sorts 1. no-date items, 2. items with dates, 3. in-press (status) items -->
     <choose>
       <if variable="issued">
         <text value="1"/>
@@ -285,7 +284,7 @@
       </else>
     </choose>
   </macro>
-<macro name="date-intext">
+  <macro name="date-intext">
     <!-- TODO: Add new item types -->
     <choose>
       <if variable="issued">
@@ -344,7 +343,6 @@
       </else>
     </choose>
   </macro>
-
   <!-- APA has two description elements following the title:
         title (parenthetical) [bracketed]  -->
   <macro name="title-and-descriptions">
@@ -1308,20 +1306,35 @@
         <text variable="DOI" prefix="https://doi.org/"/>
       </if>
       <else-if variable="URL">
-        <group delimiter=" " suffix=".">
-          <text variable="URL"/>
-          <choose>
-            <if variable="issued status" match="none">
-              <group delimiter=" " prefix="[" suffix="]">
-                <!-- <text term="retrieved" text-case="capitalize-first"/> -->
-                <date variable="accessed" form="numeric"/>
-                <!-- <text term="from"/> -->
-              </group>
-            </if>
-          </choose>
-        </group>
+        <text macro="access-url:hfh" />
       </else-if>
     </choose>
+  </macro>
+  <macro name="access-url:hfh">
+    <!-- should be like "https://.../ [10.02.2023]." -->
+    <group delimiter=" " suffix=".">
+      <group>
+        <text variable="URL"/>
+        <group prefix=" [" suffix="]">
+          <date variable="accessed" form="numeric">
+          </date>
+        </group>
+      </group>
+    </group>
+  </macro>
+  <macro name="access-url:apa">
+    <group delimiter=" ">
+      <choose>
+        <if variable="issued status" match="none">
+          <group delimiter=" ">
+            <text term="retrieved" text-case="capitalize-first"/>
+            <date variable="accessed" form="text" suffix=","/>
+            <text term="from"/>
+          </group>
+        </if>
+      </choose>
+      <text variable="URL"/>
+    </group>
   </macro>
   <macro name="event">
     <choose>
