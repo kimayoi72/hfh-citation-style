@@ -1,20 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="never" page-range-format="expanded">
+<style class="in-text" version="1.0" page-range-format="expanded" demote-non-dropping-particle="sort-only" default-locale="de-DE"
+  xmlns="http://purl.org/net/xbiblio/csl">
+  <!-- This style was edited with the Visual CSL Editor (https://editor.citationstyles.org/visualEditor/) -->
   <info>
-    <title>American Psychological Association 7th edition (single-spaced bibliography)</title>
-    <title-short>APA (single-spaced)</title-short>
-    <id>http://www.zotero.org/styles/apa-single-spaced</id>
-    <link href="http://www.zotero.org/styles/apa-single-spaced" rel="self"/>
+    <title>Hamburger Fernhochschule - Fachbereich Psychology (Deutsch)</title>
+    <title-short>HFH Psychologie (based on APA 7th edition)</title-short>
+    <id>http://www.zotero.org/styles/hamburger-fernhochschule-fachbereich-psychology</id>
+    <link href="https://github.com/kimayoi72/hfh-citation-style/blob/main/hamburger-fernhochschule-fachbereich-psychology" rel="self"/>
+    <!-- <link href="https://www.zotero.org/styles/hamburger-fernhochschule-fachbereich-psychology" rel="self"/> -->
     <link href="http://www.zotero.org/styles/apa" rel="template"/>
-    <link href="https://apastyle.apa.org/style-grammar-guidelines/references/examples" rel="documentation"/>
+    <link href="https://campus.hamburger-fh.de/material/download/a40a93295a0510b2b3af685ceebcf696_ceac31443783497dbb0ca0764cde38e4" rel="documentation" />
+    <link href="https://github.com/kimayoi72/hfh-citation-style/blob/main/LICENSE" rel="license" />
     <author>
       <name>Brenton M. Wiernik</name>
       <email>zotero@wiernik.org</email>
     </author>
+    <author>
+      <name>Frank Lindecke-Klein</name>
+      <email>frank.lindeckeklein@campus.hamburger-fh.de</email>
+    </author>
+    <contributor>
+      <name>Frank Lindecke-Klein</name>
+      <email>frank.lindeckeklein@campus.hamburger-fh.de</email>
+    </contributor>
     <category citation-format="author-date"/>
     <category field="psychology"/>
     <category field="generic-base"/>
-    <updated>2023-07-16T22:56:49+00:00</updated>
+    <summary>Zitierkonventionen des Fachbereichs Psychologie an der Hamburger Fernhochschule based on http://www.zotero.org/styles/apa-single-spaced</summary>
+    <updated>2023-08-18T11:28:53+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="en">
@@ -265,62 +278,14 @@
       </else>
     </choose>
   </macro>
-  <macro name="date-intext">
-    <choose>
-      <if variable="issued">
-        <group delimiter="/">
-          <group delimiter=" ">
-            <choose>
-              <if is-uncertain-date="original-date">
-                <text term="circa" form="short"/>
-              </if>
-            </choose>
-            <date variable="original-date">
-              <date-part name="year"/>
-            </date>
-          </group>
-          <group delimiter=" ">
-            <choose>
-              <if is-uncertain-date="issued">
-                <text term="circa" form="short"/>
-              </if>
-            </choose>
-            <group>
-              <choose>
-                <if type="interview personal_communication" match="any">
-                  <choose>
-                    <if variable="archive container-title DOI publisher URL" match="none">
-                      <!-- These variables indicate that the communication is retrievable by the reader.
-                            If not, then use the in-text-only personal communication format -->
-                      <date variable="issued" form="text"/>
-                    </if>
-                    <else>
-                      <date variable="issued">
-                        <date-part name="year"/>
-                      </date>
-                    </else>
-                  </choose>
-                </if>
-                <else>
-                  <date variable="issued">
-                    <date-part name="year"/>
-                  </date>
-                </else>
-              </choose>
-              <text variable="year-suffix"/>
-            </group>
-          </group>
-        </group>
-      </if>
-      <else-if variable="status">
-        <text variable="status" text-case="lowercase"/>
-        <text variable="year-suffix" prefix="-"/>
-      </else-if>
-      <else>
-        <text term="no date" form="short"/>
-        <text variable="year-suffix" prefix="-"/>
-      </else>
-    </choose>
+
+  <macro name="hfh:page-intext">
+    <group delimiter=" ">
+      <group>
+        <label suffix=" " variable="page" form="short"/>
+        <number variable="page"/>
+      </group>
+    </group>
   </macro>
   <!-- APA has two description elements following the title:
         title (parenthetical) [bracketed]  -->
@@ -1586,7 +1551,8 @@
       <group delimiter=", ">
         <text macro="author-intext"/>
         <text macro="date-intext"/>
-        <text macro="citation-locator"/>
+        <!-- HFH wants to have a page -->
+        <text macro="hfh:page-intext"/>
       </group>
     </layout>
   </citation>
